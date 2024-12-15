@@ -6,7 +6,7 @@
 /*   By: fel-asri <fel-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 11:22:28 by fel-asri          #+#    #+#             */
-/*   Updated: 2024/12/15 16:52:44 by fel-asri         ###   ########.fr       */
+/*   Updated: 2024/12/15 16:57:50 by fel-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_puthexaa(unsigned long hexa)
 	lowx = "0123456789abcdef";
 	if (hexa < 16)
 	{
-			ft_putchar_fd(lowx[hexa], 1);
+		ft_putchar_fd(lowx[hexa], 1);
 		i++;
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: fel-asri <fel-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 10:02:08 by fel-asri          #+#    #+#             */
-/*   Updated: 2024/12/15 16:55:04 by fel-asri         ###   ########.fr       */
+/*   Updated: 2024/12/15 16:57:04 by fel-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	check_format(char c, va_list args, int *i)
 {
-	int tmp;
-	
+	int	tmp;
+
 	if (c == 'c')
 		*i += ft_putchar_fd(va_arg(args, int), 1);
 	else if (c == 's')
