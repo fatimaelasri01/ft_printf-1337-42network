@@ -6,7 +6,7 @@
 /*   By: fel-asri <fel-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 10:02:08 by fel-asri          #+#    #+#             */
-/*   Updated: 2024/12/15 16:57:04 by fel-asri         ###   ########.fr       */
+/*   Updated: 2024/12/15 17:59:57 by fel-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int	ft_printf(const char *format, ...)
 		}
 		else
 			count += ft_putchar_fd(format[i], 1);
-		i++;
+		if (format[i])
+			i++;
 	}
 	va_end(args);
 	return (count);
