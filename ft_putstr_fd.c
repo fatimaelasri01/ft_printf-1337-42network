@@ -6,22 +6,23 @@
 /*   By: fel-asri <fel-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 11:17:45 by fel-asri          #+#    #+#             */
-/*   Updated: 2024/12/15 15:02:05 by fel-asri         ###   ########.fr       */
+/*   Updated: 2024/12/15 15:37:47 by fel-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
 
 	i = 0;
 	if (!s)
-		return ;
+		s = "(null)";
 	while (s[i])
 	{
 		write(fd, &s[i], 1);
 		i++;
 	}
+	return (i);
 }

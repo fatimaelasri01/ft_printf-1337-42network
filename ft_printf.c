@@ -6,38 +6,36 @@
 /*   By: fel-asri <fel-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 10:02:08 by fel-asri          #+#    #+#             */
-/*   Updated: 2024/12/15 14:57:29 by fel-asri         ###   ########.fr       */
+/*   Updated: 2024/12/15 16:55:04 by fel-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	check_format(char c, va_list args, int i)
+static void	check_format(char c, va_list args, int *i)
 {
-	char	*tmp;
-
+	int tmp;
+	
 	if (c == 'c')
+		*i += ft_putchar_fd(va_arg(args, int), 1);
+	else if (c == 's')
+		*i += ft_putstr_fd(va_arg(args, char *), 1);
+	else if (c == 'i' || c == 'd')
 	{
-		ft_putchar_fd(va_arg(args, char), 1);
-		i = 1;
+		tmp = va_arg(args, int);
+		ft_putnbr_fd(tmp, 1);
+		*i += ft_nbrlen(tmp);
 	}
-	if (c == 's')
+	else if (c == 'u')
 	{
-		tmp = va_arg(args, char *);
-		ft_putstr_fd(tmp, 1);
-		i = ft_strlen(tmp);
+		*i += ft_putunsigned(va_arg(args, unsigned int));
 	}
-	if (c == 'i' || c == 'u')
-	{
-		i = va_arg(args, int);
-		ft_putnbr_fd(i, 1);
-		i = ft_nbrlen(i);
-	}
-	if (c == 'p')
-		i = ft_putaddress(va_arg(args, void *));
-	if (c == 'x' || c == 'X')
-		i = ft_puthexa(va_arg(args, void *), c);
-	return (i);
+	else if (c == 'p')
+		*i += ft_putaddress(va_arg(args, unsigned long));
+	else if (c == 'x' || c == 'X')
+		*i += ft_puthexa(va_arg(args, unsigned int), c);
+	else if (c == '%')
+		*i += ft_putchar_fd('%', 1);
 }
 
 int	ft_printf(const char *format, ...)
@@ -53,13 +51,11 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			count += check_format(format[i + 1], args, count);
-			if (format[i + 1] == '%')
-				ft_putchar_fd(1, '%');
+			check_format(format[i + 1], args, &count);
 			i++;
 		}
 		else
-			ft_putchar(format[i]);
+			count += ft_putchar_fd(format[i], 1);
 		i++;
 	}
 	va_end(args);

@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
+/*   ft_putunsigned.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fel-asri <fel-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 11:33:21 by fel-asri          #+#    #+#             */
-/*   Updated: 2024/12/15 15:44:41 by fel-asri         ###   ########.fr       */
+/*   Created: 2024/12/15 16:33:32 by fel-asri          #+#    #+#             */
+/*   Updated: 2024/12/15 16:38:28 by fel-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_nbrlen(int nb)
-{
-	int	c;
+#include "ft_printf.h"
 
-	c = 0;
-	if (nb == 0)
-		return (1);
-	if (nb == -2147483648)
-		return (11);
-	if (nb < 0)
+int ft_putunsigned(unsigned int n)
+{
+    int c;
+
+    c = 0;
+    if (n < 10)
+	{	
+        ft_putchar_fd(n + '0', 1);
+        c++;
+    }
+	else
 	{
-		c++;
-		nb *= -1;
+		c += ft_putunsigned(n / 10);
+		ft_putchar_fd((n % 10) + '0', 1);
+        c++;
 	}
-	while (nb > 0)
-	{
-		nb = nb / 10;
-		c++;
-	}
-	return (c);
+    return (c);
 }

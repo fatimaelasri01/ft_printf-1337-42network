@@ -6,18 +6,39 @@
 /*   By: fel-asri <fel-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 11:22:28 by fel-asri          #+#    #+#             */
-/*   Updated: 2024/12/15 15:00:44 by fel-asri         ###   ########.fr       */
+/*   Updated: 2024/12/15 16:52:44 by fel-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putaddress(unsigned int p)
+int	ft_puthexaa(unsigned long hexa)
+{
+	int		i;
+	char	*lowx;
+
+	i = 0;
+	lowx = "0123456789abcdef";
+	if (hexa < 16)
+	{
+			ft_putchar_fd(lowx[hexa], 1);
+		i++;
+	}
+	else
+	{
+		i++;
+		i += ft_puthexaa(hexa / 16);
+		ft_putchar_fd(lowx[hexa % 16], 1);
+	}
+	return (i);
+}
+
+int	ft_putaddress(unsigned long p)
 {
 	int	c;
 
 	c = 0;
-	ft_putstr_fd("0x", 1);
-	c = ft_puthexa(p, 'x');
+	c += ft_putstr_fd("0x", 1);
+	c += ft_puthexaa(p);
 	return (c);
 }

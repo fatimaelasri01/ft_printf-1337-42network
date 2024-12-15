@@ -6,13 +6,14 @@
 /*   By: fel-asri <fel-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 11:10:04 by fel-asri          #+#    #+#             */
-/*   Updated: 2024/12/15 15:01:42 by fel-asri         ###   ########.fr       */
+/*   Updated: 2024/12/15 15:40:27 by fel-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_putchar_fd(int c, int fd)
 {
 	write(fd, &c, 1);
+	return (1);
 }
